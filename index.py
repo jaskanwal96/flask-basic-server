@@ -26,10 +26,10 @@ def flag():
     # This endpoint is only here ato simulate the /flag request
     # Replace this logic with actual flag processing if needed
     data = request.get_json()
-    if not data or 'Flag' not in data:
-        return jsonify({"error": "Missing Flag"}), 400
-
-    return jsonify({"status": "Flag received successfully!"})
+    # if not data or 'Flag' not in data:
+    #     return jsonify({"error": "Missing Flag"}), 400
+    print(data)
+    return jsonify({"status": "Flag received successfully!", "flag": data})
 
 if __name__ == '__main__':
     # Run the server on port 5000
