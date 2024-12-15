@@ -1,0 +1,9 @@
+altgraph @ file:///AppleInternal/Library/BuildRoots/2c89a47b-9dd5-11ef-938f-6e654a286000/Library/Caches/com.apple.xbs/Sources/python3/altgraph-0.17.2-py2.py3-none-any.whl
+blinker==1.9.0
+click==8.1.7
+Flask==3.1.0
+future @ file:///AppleInternal/Library/BuildRoots/2c89a47b-9dd5-11ef-938f-6e654a286000/Library/Caches/com.apple.xbs/Sources/python3/future-0.18.2-py3-none-any.whl
+importlib_metadata==8.5.0
+itsdangerous==2.2.0
+Jinja2==3.1.4
+macholib @ file:///AppleInternal/Library/BuildRoots/2c89a47b-9dd5
