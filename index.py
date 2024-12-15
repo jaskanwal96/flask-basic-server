@@ -22,7 +22,7 @@ def login():
     # Return the token in the response
     return jsonify({"token": token})
 
-@app.route('/candle', methods=['POST'])
+@app.route('/candle', methods=['GET'])
 def candle():
     code = request.args.get('code')
     year = request.args.get('year')
