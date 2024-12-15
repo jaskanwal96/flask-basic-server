@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 import hashlib
+import pandas as pd
 
 app = Flask(__name__)
 
@@ -21,6 +22,34 @@ def login():
     # Return the token in the response
     return jsonify({"token": token})
 
+@app.route('/candle', methods=['POST'])
+def candle():
+    code = request.args.get('code')
+    year = request.args.get('year')
+    month = request.args.get('month')
+    day = request.args.get('day')
+    hour = request.args.get('hour')
+
+    datetime_pattern = f"{year}-{month.zfill(2)}-{day.zfill(2)} {hour.zfill(2)}"
+
+    
+    # Parse the incoming JSON request
+    df = pd.read_csv("order_books.csv")
+    filtered = df[
+        (df['code'] == code) & 
+        (df['time'].str.startswith(datetime_pattern))
+    ]
+    if filtered.empty:
+        return jsonify({"error": "No data found for the given parameters"}), 404
+    ohlc = {
+        "open": int(filtered.iloc[0]['price']),
+        "high": int(filtered['price'].max()),
+        "low": int(filtered['price'].min()),
+        "close": int(filtered.iloc[-1]['price']),
+    }
+    print(ohlc)
+    return ohlc
+
 @app.route('/flag', methods=['PUT'])
 def flag():
     # This endpoint is only here ato simulate the /flag request
@@ -32,5 +61,5 @@ def flag():
     return jsonify({"status": "Flag received successfully!", "flag": data})
 
 if __name__ == '__main__':
-    # Run the server on port 5000
-    app.run(host='0.0.0.0', port=5000)
+    # Run the server on port 5001
+    app.run(host='0.0.0.0', port=5001)
